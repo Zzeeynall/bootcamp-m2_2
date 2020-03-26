@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Подбор оптимального вклада</h1>
+      <div class="calc">
+        <table id="info">
+          <tr>
+            <td>Начальная сумма вклада</td>
+            <td><input type="number" id="start" /></td>
+          </tr>
+          <tr>
+            <td>Сумма ежемесячного пополнения</td>
+            <td><input type="number" id="monthIncrease" /></td>
+          </tr>
+          <tr>
+            <td>Срок вклада</td>
+            <td><input type="number" id="period" /></td>
+          </tr>
+          <tr>
+            <td>Валюта вклада</td>
+            <!-- <td><input type="number" id="days" /></td> -->
+            <td>
+              <select name="" id="currency">
+                <option value="RUB">RUB</option>
+                <option value="USD">USD</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><button id="btn">Подобрать</button></td>
+          </tr>
+        </table>
+      </div>
+      <div id="main"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

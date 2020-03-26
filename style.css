@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.calc {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+
+h1 {
+    text-align: center;
+    margin-top: 120px;
+    font-size: 24px;
+}
+
+.calc table#info {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #204051;
+    border-radius: 5px;
+}
+
+.calc table#info tr td {
+    padding: 5px;
+}
+
+.calc table#info tr td button {
+    width: 100%;
+    padding: 10px;
+    background-color: #204051;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    outline: none;
+}
+
+div#main {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+table.offer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #4C7684;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+
+table.offer td {
+    padding: 5px;
+    text-align: center;
+}
+
+table.offer tr:first-child {
+    padding: 20px;
+    background-color: #CAE8D5;
+    font-size: 18px;
+}
+
+table.offer tr:first-child th {
+    padding: 10px;
+}
