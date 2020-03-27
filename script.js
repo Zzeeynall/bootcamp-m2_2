@@ -623,6 +623,7 @@ class Calculator {
   //function finds all suitable offers based user input
   findOffers(client) {
     let bank = new BankProduct();
+    let mainDiv = document.querySelector('.main');
     const fitOffer = bank.res.filter(b => {
       if (client.canDeposit) {
         if (client.deposit >= b.sumMin && client.deposit <= b.sumMax && client.canDeposit == b.canDeposit && client.period >= b.termMin && client.period <= b.termMax && client.currency == b.currency) {
@@ -635,7 +636,8 @@ class Calculator {
       }
     });
     if (fitOffer.length == 0) {
-      alert("Нет подходящих вариантов");
+      mainDiv.innerHTML = "Нет подходящих вариантов";
+      //alert("Нет подходящих вариантов");
       return false;
     }
     return fitOffer;
@@ -706,19 +708,24 @@ class Application {
   }
 
   checkInput(startDoc, monthIncreaseDoc, periodDoc) {
+    let mainDiv = document.querySelector('.main');
     if (startDoc == "" && monthIncreaseDoc == "" && periodDoc == "") {
+      mainDiv.innerHTML = "";
       alert("Заполните пожалуйста поля!");
       return false;
     }
     if (startDoc <= 0) {
+      mainDiv.innerHTML = "";
       alert("Начальная сумма должна быть больше нуля");
       return false;
     }
     if (monthIncreaseDoc < 0) {
+      mainDiv.innerHTML = "";
       alert("Сумма ежемесячного пополнения должна быть больше или равна нулю");
       return false;
     }
     if (periodDoc <= 0) {
+      mainDiv.innerHTML = "";
       alert("Срок вклада должна быть больше нуля");
       return false;
     }
@@ -726,4 +733,4 @@ class Application {
   }
 }
 
-const app = new Application();
+new Application();
