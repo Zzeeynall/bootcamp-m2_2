@@ -76,3 +76,7 @@ table.offer tr:first-child {
 table.offer tr:first-child th {
     padding: 10px;
 }
+
+.block{
+    display: none;
+}

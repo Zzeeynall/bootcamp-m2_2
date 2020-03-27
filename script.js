@@ -699,19 +699,24 @@ class Application {
   }
 
   checkInput(startDoc, monthIncreaseDoc, periodDoc) {
+    let tableOffer = document.querySelector('.offer');
     if (startDoc == "" && monthIncreaseDoc == "" && periodDoc == "") {
+      tableOffer.className = 'block';
       alert("Заполните пожалуйста поля!");
       return false;
     }
     if (startDoc <= 0) {
+      tableOffer.className = 'block';
       alert("Начальная сумма должна быть больше нуля");
       return false;
     }
     if (monthIncreaseDoc < 0) {
+      tableOffer.className = 'block';
       alert("Сумма ежемесячного пополнения должна быть больше или равна нулю");
       return false;
     }
     if (periodDoc <= 0) {
+      tableOffer.className = 'block';
       alert("Срок вклада должна быть больше нуля");
       return false;
     }
