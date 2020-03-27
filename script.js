@@ -1,3 +1,4 @@
+//class creates an object based on user input
 class Deposit {
   constructor(deposit, monthIcrease, period, currency, canDeposit) {
     this.deposit = deposit;
@@ -8,10 +9,10 @@ class Deposit {
   }
 }
 
+//class contains all Bank products
 class BankProduct {
   constructor() {
-    this.res = [
-      {
+    this.res = [{
         bankName: "Газпромбанк",
         investName: "Ваш успех",
         currency: "RUB",
@@ -598,9 +599,11 @@ class BankProduct {
   }
 }
 
+//class selects the most suitable offer
 class Calculator {
   constructor() {}
 
+  //function selects the most suitable offers
   calcFitted(startDoc, monthIncreaseDoc, periodDoc, bestOffers) {
     let total = startDoc;
     let maxOffer = this.getMaxIncomeBank(bestOffers);
@@ -617,6 +620,7 @@ class Calculator {
     return total;
   }
 
+  //function finds all suitable offers based user input
   findOffers(client) {
     let bank = new BankProduct();
     const fitOffer = bank.res.filter(b => {
@@ -637,6 +641,7 @@ class Calculator {
     return fitOffer;
   }
 
+  //function finds the largest percent
   getMaxIncomeBank(bestOffers) {
     let maxIncome = bestOffers.reduce((prev, cur) => {
       if (prev.incomeType > cur.incomeType) {
@@ -649,6 +654,7 @@ class Calculator {
   }
 }
 
+//class shows all the most suitable offers
 class Application {
   constructor() {
     this.offer = [];
@@ -658,7 +664,7 @@ class Application {
     this.currency = document.querySelector("#currency");
     this.btn = document.getElementById("btn");
     const self = this;
-    this.btn.addEventListener("click", function() {
+    this.btn.addEventListener("click", function () {
       if (self.checkInput(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value)) {
         let e = currency.options[currency.selectedIndex].value;
         let client = new Deposit(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value, e);
@@ -675,7 +681,7 @@ class Application {
   }
 
   createTable() {
-    let main = document.getElementById("main");
+    let main = document.querySelector(".main");
     let arr = [];
     arr[0] = '<table class="offer"><tr><th>Название банка</th><th>Вклад</th><th>Процент</th><th>Итоговая сумма</th></tr>';
     for (let i = 0; i < this.offer.length; i++) {
@@ -688,6 +694,7 @@ class Application {
     main.innerHTML = "<table>" + arr.join("") + "</table>";
   }
 
+  //function creates rows of table
   getRowCode(bankName, investName, incomeType, total, id) {
     const name = "<td>" + bankName + "</td>";
     const invest = "<td>" + investName + "</td>";
@@ -699,24 +706,19 @@ class Application {
   }
 
   checkInput(startDoc, monthIncreaseDoc, periodDoc) {
-    let tableOffer = document.querySelector('.offer');
     if (startDoc == "" && monthIncreaseDoc == "" && periodDoc == "") {
-      tableOffer.className = 'block';
       alert("Заполните пожалуйста поля!");
       return false;
     }
     if (startDoc <= 0) {
-      tableOffer.className = 'block';
       alert("Начальная сумма должна быть больше нуля");
       return false;
     }
     if (monthIncreaseDoc < 0) {
-      tableOffer.className = 'block';
       alert("Сумма ежемесячного пополнения должна быть больше или равна нулю");
       return false;
     }
     if (periodDoc <= 0) {
-      tableOffer.className = 'block';
       alert("Срок вклада должна быть больше нуля");
       return false;
     }
