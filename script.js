@@ -14,6 +14,28 @@ class BankProduct {
   constructor() {
     this.res = banks;
   }
+
+  //function finds all suitable offers based user input
+  findOffers(client) {
+    let mainDiv = document.querySelector('.main');
+    const fitOffer = this.res.filter(b => {
+      if (client.canDeposit) {
+        if (client.deposit >= b.sumMin && client.deposit <= b.sumMax && client.canDeposit == b.canDeposit && client.period >= b.termMin && client.period <= b.termMax && client.currency == b.currency) {
+          return b;
+        }
+      } else {
+        if (client.deposit > b.sumMin && client.deposit < b.sumMax && client.period >= b.termMin && client.period <= b.termMax && client.currency == b.currency) {
+          return b;
+        }
+      }
+    });
+    if (fitOffer.length == 0) {
+      mainDiv.innerHTML = "Нет подходящих вариантов";
+      //alert("Нет подходящих вариантов");
+      return false;
+    }
+    return fitOffer;
+  }
 }
 
 //class selects the most suitable offer
@@ -35,29 +57,6 @@ class Calculator {
       bank.total = Math.round(total);
     }
     return total;
-  }
-
-  //function finds all suitable offers based user input
-  findOffers(client) {
-    let bank = new BankProduct();
-    let mainDiv = document.querySelector('.main');
-    const fitOffer = bank.res.filter(b => {
-      if (client.canDeposit) {
-        if (client.deposit >= b.sumMin && client.deposit <= b.sumMax && client.canDeposit == b.canDeposit && client.period >= b.termMin && client.period <= b.termMax && client.currency == b.currency) {
-          return b;
-        }
-      } else {
-        if (client.deposit > b.sumMin && client.deposit < b.sumMax && client.period >= b.termMin && client.period <= b.termMax && client.currency == b.currency) {
-          return b;
-        }
-      }
-    });
-    if (fitOffer.length == 0) {
-      mainDiv.innerHTML = "Нет подходящих вариантов";
-      //alert("Нет подходящих вариантов");
-      return false;
-    }
-    return fitOffer;
   }
 
   //function finds the largest percent
@@ -87,8 +86,9 @@ class Application {
       if (self.checkInput(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value)) {
         let e = currency.options[currency.selectedIndex].value;
         let client = new Deposit(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value, e);
+        let bank = new BankProduct();
         let calc = new Calculator();
-        let bestOffers = calc.findOffers(client);
+        let bestOffers = bank.findOffers(client);
         if (bestOffers) {
           calc.calcFitted(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value, bestOffers);
           self.offer = Array.from(calc.getMaxIncomeBank(bestOffers));
@@ -143,7 +143,7 @@ class Application {
     }
     if (periodDoc <= 0) {
       mainDiv.innerHTML = "";
-      alert("Срок вклада должна быть больше нуля");
+      alert("Срок вклада должнен быть больше нуля");
       return false;
     }
     return true;
