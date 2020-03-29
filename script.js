@@ -82,12 +82,10 @@ class Application {
     this.currency = document.querySelector("#currency");
     this.btn = document.getElementById("btn");
     const self = this;
-    this.btn.addEventListener("click", function (){
-      self.showOffers();
-    });
+    this.btn.addEventListener("click", this.showOffers);
   }
 
-  showOffers() {
+  showOffers = () => {
     if (this.checkInput(+this.startDoc.value, +this.monthIncreaseDoc.value, +this.periodDoc.value)) {
       let e = currency.options[currency.selectedIndex].value;
       let client = new Deposit(+this.startDoc.value, +this.monthIncreaseDoc.value, +this.periodDoc.value, e);
