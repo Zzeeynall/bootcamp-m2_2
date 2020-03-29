@@ -82,21 +82,25 @@ class Application {
     this.currency = document.querySelector("#currency");
     this.btn = document.getElementById("btn");
     const self = this;
-    this.btn.addEventListener("click", function () {
-      if (self.checkInput(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value)) {
-        let e = currency.options[currency.selectedIndex].value;
-        let client = new Deposit(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value, e);
-        let bank = new BankProduct();
-        let calc = new Calculator();
-        let bestOffers = bank.findOffers(client);
-        if (bestOffers) {
-          calc.calcFitted(+self.startDoc.value, +self.monthIncreaseDoc.value, +self.periodDoc.value, bestOffers);
-          self.offer = Array.from(calc.getMaxIncomeBank(bestOffers));
-          self.createTable();
-        }
-      }
-      return false;
+    this.btn.addEventListener("click", function (){
+      self.showOffers();
     });
+  }
+
+  showOffers() {
+    if (this.checkInput(+this.startDoc.value, +this.monthIncreaseDoc.value, +this.periodDoc.value)) {
+      let e = currency.options[currency.selectedIndex].value;
+      let client = new Deposit(+this.startDoc.value, +this.monthIncreaseDoc.value, +this.periodDoc.value, e);
+      let bank = new BankProduct();
+      let calc = new Calculator();
+      let bestOffers = bank.findOffers(client);
+      if (bestOffers) {
+        calc.calcFitted(+this.startDoc.value, +this.monthIncreaseDoc.value, +this.periodDoc.value, bestOffers);
+        this.offer = Array.from(calc.getMaxIncomeBank(bestOffers));
+        this.createTable();
+      }
+    }
+    return false;
   }
 
   createTable() {
@@ -108,19 +112,19 @@ class Application {
       let investName = this.offer[i].investName;
       let incomeType = this.offer[i].incomeType;
       let total = this.offer[i].total;
-      arr[i + 1] = this.getRowCode(bankName, investName, incomeType, total, "tr" + i);
+      arr[i + 1] = this.createRow(bankName, investName, incomeType, total);
     }
     main.innerHTML = "<table>" + arr.join("") + "</table>";
   }
 
   //function creates rows of table
-  getRowCode(bankName, investName, incomeType, total, id) {
+  createRow(bankName, investName, incomeType, total) {
     const name = "<td>" + bankName + "</td>";
     const invest = "<td>" + investName + "</td>";
     const income = "<td>" + incomeType + "</td>";
     const price = "<td>" + total + "</td>";
 
-    let row = `<tr class="active" id=${id}>` + name + invest + income + price + "</tr>";
+    let row = `<tr>` + name + invest + income + price + "</tr>";
     return row;
   }
 
