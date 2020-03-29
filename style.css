@@ -77,6 +77,9 @@ table.offer tr:first-child {
 table.offer tr:first-child th {
     padding: 10px;
 }
+table.offer tr{
+    border: 1px solid #4C7684;
+}
 
 .block{
     display: none;

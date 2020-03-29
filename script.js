@@ -31,7 +31,6 @@ class BankProduct {
     });
     if (fitOffer.length == 0) {
       mainDiv.innerHTML = "Нет подходящих вариантов";
-      //alert("Нет подходящих вариантов");
       return false;
     }
     return fitOffer;
@@ -81,7 +80,6 @@ class Application {
     this.periodDoc = document.getElementById("period");
     this.currency = document.querySelector("#currency");
     this.btn = document.getElementById("btn");
-    const self = this;
     this.btn.addEventListener("click", this.showOffers);
   }
 
