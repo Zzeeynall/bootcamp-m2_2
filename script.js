@@ -110,7 +110,7 @@ class Application {
       let total = this.offer[i].total;
       arr[i + 1] = this.createRow(bankName, investName, incomeType, total);
     }
-    main.innerHTML = "<table>" + arr.join("") + "</table>";
+    main.innerHTML = arr.join("") + "</table>";
   }
 
   //function creates rows of table
